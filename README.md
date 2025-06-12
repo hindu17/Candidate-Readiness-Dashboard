@@ -1,71 +1,80 @@
-# Getting Started with Create React App
+# SKANJO CV Matcher
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A smart AI-powered tool that matches a candidate’s CV with a job description using Google Gemini API.
 
-## Available Scripts
+🔗 **Live Demo**: [https://candidatereadinessdasboard.netlify.app/]
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🔍 Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Paste  CV and JD
+- Get match score and optimized CV
+- Detect skill gaps with learning suggestions
+- Download optimized CV as `.txt`
+- Simulate assignment submission with feedback
+- Responsive UI built with Tailwind CSS
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## ⚙️ Tech Stack
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- ReactJS
+- Tailwind CSS
+- Google Gemini API
+- Netlify + Netlify Functions
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🚀 Run Locally
+# 1. Clone the repository
+git clone https://github.com/hindu17/Candidate-Readiness-Dashboard
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# 2. Navigate into the project
+cd candidate-readiness-dashboard
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# 3. Install dependencies
+npm install
 
-### `npm run eject`
+# 4. Create a .env file
+ .env
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Inside .env, add:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+REACT_APP_GEMINI_API_KEY=your_actual_api_key_here
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Then:
+# 5. Start the development server
+npm run dev
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+The app will run at: http://localhost:3000/
 
-## Learn More
+💡 Usage Instructions
+Paste a CV and Job Description.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Click "Match & Score CV".
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The Gemini AI API will:
 
-### Code Splitting
+Compare both inputs
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Return a match score
 
-### Analyzing the Bundle Size
+Show skill gaps and recommendations
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+View results in the Score Display and Skill Gaps sections.
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+🤖 AI Integration
+Used Google Gemini API via geminiAPI.js
 
-### Advanced Configuration
+Cleaned and formatted response using string parsing techniques
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+🎨 TailwindCSS Usage
+Responsive layout with Tailwind (flex, grid, min-h-screen, etc.)
 
-### Deployment
+Used utility-first classes for a consistent look
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 📸 Screenshot
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-"# Candidate-Readiness-Dashboard" 
+![Candidate Readiness Dashboard](.\public\screenshot.png)
