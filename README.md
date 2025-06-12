@@ -2,7 +2,10 @@
 
 A smart AI-powered tool that matches a candidate’s CV with a job description using Google Gemini API.
 
-🔗 **Live Demo**: [https://candidatereadinessdasboard.netlify.app/]
+## 🚀 Live Demo
+
+👉 [View Deployed App on Netlify](https://candidatereadinessdasboard.netlify.app/)
+
 
 ---
 
