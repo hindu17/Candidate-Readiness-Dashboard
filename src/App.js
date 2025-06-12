@@ -9,17 +9,23 @@ const App = () => {
   const [skillGaps, setSkillGaps] = useState([]);
   const [loading, setLoading] = useState(false);
 
- const callGeminiAPI = async (prompt) => {
+  const callGeminiAPI = async (prompt) => {
+  const chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
+  const payload = { contents: chatHistory };
+  const apiKey = process.env.REACT_APP_GEMINI_API_KEY;
+  const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
   try {
-    const response = await fetch('/.netlify/functions/gemini', {
+    const response = await fetch(apiUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ prompt }),
+      body: JSON.stringify(payload)
     });
-    const result = await response.text();
-    return result;
+
+    const result = await response.json();
+    return result?.candidates?.[0]?.content?.parts?.[0]?.text || "Error: Invalid response from AI.";
   } catch (err) {
-    return `Error calling Gemini Function: ${err.message}`;
+    return `Error calling AI: ${err.message}`;
   }
 };
 
