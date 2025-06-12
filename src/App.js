@@ -30,7 +30,7 @@ const App = () => {
 };
 
 
- const handleMatchScore = async () => {
+  const handleMatchScore = async () => {
   setLoading(true);
 
   const matchScorePrompt = `Analyze the following Candidate CV and Job Description.
@@ -46,11 +46,9 @@ Original CV Match Score: [Score]%
 Optimized CV Text: [Optimized CV Content]
 Optimized CV Match Score: [Score]%`;
 
- const result = await callGeminiAPI(matchScorePrompt);
- console.log("🔍 Gemini Match Score Response:", result);
+  const result = await callGeminiAPI(matchScorePrompt);
+  console.log("🔍 Gemini Match Score Response:", result);
 
-
-  // ✅ Improved regex
   const match = result.match(
     /Original CV Match Score:\s*(\d+)%[\s\S]*?Optimized CV Text:\s*([\s\S]*?)Optimized CV Match Score:\s*(\d+)%/
   );
@@ -65,28 +63,49 @@ Optimized CV Match Score: [Score]%`;
     setOptimizedCvText("Failed to parse AI response");
   }
 
- 
+  const skillGapsPrompt = `Analyze the following Candidate CV and Job Description.
 
-    const skillGapsPrompt = `Based on the following Candidate CV and Job Description, identify 3-5 key skill gaps.
-  CV: ${cvText}
-  Job Description: ${jdText}
+CV:
+${cvText}
 
-  For each skill gap, suggest a very brief mini-assignment or learning snippet (1-2 sentences) to help close that gap.
+JD:
+${jdText}
 
-  Format your response clearly with these exact sections:
-  Skill Gaps:
-  - [Skill 1]: [Mini-assignment/Learning snippet]
-  - [Skill 2]: [Mini-assignment/Learning snippet]`;
+Your task:
+1. Identify 3–5 clear skill gaps in the CV compared to the JD.
+2. For each, write a mini-assignment or learning snippet to address it.
+3. Use *exactly* this format:
 
-    const skillsResult = await callGeminiAPI(skillGapsPrompt);
-    const gaps = skillsResult.match(/- (.*?): (.*?)(?=\n- |$)/g);
-    setSkillGaps(gaps?.map(gap => {
-      const [, skill, desc] = gap.match(/- (.*?): (.*)/);
-      return { skill, desc, result: null };
-    }) || []);
+Skill Gaps:
+- [Skill 1]: [Mini-assignment/Learning snippet]
+- [Skill 2]: [Mini-assignment/Learning snippet]`;
 
-    setLoading(false);
-  };
+  const skillsResult = await callGeminiAPI(skillGapsPrompt);
+  console.log("🧠 Raw skillGaps response from Gemini:", skillsResult);
+
+  let gaps = skillsResult.match(/- (.*?): (.*?)(?=\n- |$)/g);
+
+  if (gaps && gaps.length > 0) {
+    setSkillGaps(
+      gaps.map(gap => {
+        const [, skill, desc] = gap.match(/- (.*?): (.*)/);
+        return { skill, desc, result: null };
+      })
+    );
+  } else {
+    // Fallback to always show something
+    setSkillGaps([
+      {
+        skill: "N/A",
+        desc: "Could not extract skill gaps. Please ensure CV and JD are detailed and relevant.",
+        result: null
+      }
+    ]);
+  }
+
+  setLoading(false);
+};
+
 
   const handleDownload = () => {
     const blob = new Blob([optimizedCvText], { type: 'text/plain' });
@@ -104,6 +123,7 @@ Optimized CV Match Score: [Score]%`;
     };
     setSkillGaps(updatedGaps);
   };
+
 
   return (
     <div className="p-6 max-w-6xl mx-auto font-sans space-y-8 bg-gray-50 min-h-screen">
