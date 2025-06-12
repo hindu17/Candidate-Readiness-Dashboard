@@ -2,19 +2,18 @@ const fetch = require('node-fetch');
 
 exports.handler = async (event) => {
   const { prompt } = JSON.parse(event.body || '{}');
-
   const apiKey = process.env.GEMINI_API_KEY;
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
   const payload = {
-    contents: [{ role: "user", parts: [{ text: prompt }] }]
+    contents: [{ role: 'user', parts: [{ text: prompt }] }],
   };
 
   try {
     const response = await fetch(url, {
       method: 'POST',
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
     });
 
     const data = await response.json();
@@ -25,7 +24,7 @@ exports.handler = async (event) => {
   } catch (error) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: error.message })
+      body: JSON.stringify({ error: error.message }),
     };
   }
 };

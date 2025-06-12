@@ -9,20 +9,20 @@ const App = () => {
   const [skillGaps, setSkillGaps] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const callGeminiAPI = async (prompt) => {
+ const callGeminiAPI = async (prompt) => {
   try {
     const response = await fetch('/.netlify/functions/gemini', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ prompt })
+      body: JSON.stringify({ prompt }),
     });
-
     const result = await response.text();
     return result;
-  } catch (error) {
-    return `Error calling Gemini Function: ${error.message}`;
+  } catch (err) {
+    return `Error calling Gemini Function: ${err.message}`;
   }
 };
+
 
  const handleMatchScore = async () => {
   setLoading(true);
