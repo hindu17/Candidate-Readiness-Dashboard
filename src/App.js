@@ -127,7 +127,7 @@ Skill Gaps:
 
   return (
     <div className="p-6 max-w-6xl mx-auto font-sans space-y-8 bg-gray-50 min-h-screen">
-      <h1 className="text-4xl font-extrabold text-center text-indigo-700">SKANJO CV Matcher</h1>
+      <h1 className="text-4xl font-extrabold text-center text-indigo-700">Candidate Readiness Dashboard</h1>
 
       <div className="grid md:grid-cols-2 gap-6">
         <textarea
